@@ -4,7 +4,8 @@ namespace ErkamKahriman\Vanish;
 
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
-use pocketmine\Player;
+use pocketmine\{Player, Server};
+use pocketmine\entity\{Effect, EffectInstance};
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as C;
