@@ -1,2 +1,2 @@
 # Vanish
-Test
+/vanish (perm: vanish.use) default: op
