@@ -1,12 +1,13 @@
-name: Vanish
+name: SuperVanish
 main: ErkamKahriman\Vanish\Vanish
-version: 2.1
+version: 2.2
 author: ErkamKahriman
 api: 3.0.0
 commands:
-  vanish:
+  supervanish:
     description: "Vanish yourself"
+    aliases: [sv]
 permissions:
-  vanish.use:
+  supervanish.spectate:
     description: "Vanish use perm"
     default: op

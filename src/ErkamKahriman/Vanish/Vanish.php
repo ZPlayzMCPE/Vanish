@@ -32,18 +32,24 @@ class Vanish extends PluginBase implements Listener {
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
         $name = $sender->getName();
-        if($cmd->getName() == "vanish"){
+        if($cmd->getName() == "supervanish"){
             if($sender instanceof Player){
-                if($sender->hasPermission("vanish.use")){
+                if($sender->hasPermission("supervanish.spectate")){
                     if($this->vanish[$name] == false){
                         $this->vanish[$name] = true;
-                        $sender->sendMessage(self::PREFIX.C::GREEN."You are now vanished.");
+                        $sender->sendMessage(self::PREFIX.C::GREEN."§dYou are now vanished. §5No one can see you.");
+						$sender->addEffect(new EffectInstance(Effect::getEffect(Effect::NIGHT_VISION), (99999999*20), (1), (false)));
+                        $sender->getPlayer()->addTitle("§6§lVanish Mode", "§5§lis enabled!", 40, 100, 40);
+                        $this->getServer()->broadcastMessage(C::GREEN . "§c$name §ehas left the game.");
                     } else{
                         $this->vanish[$name] = false;
                         foreach($this->getServer()->getOnlinePlayers() as $players){
                             $players->showPlayer($sender);
                         }
-                        $sender->sendMessage(self::PREFIX.C::RED."You are no longer vanished!");
+						$sender->sendMessage(self::PREFIX . C::RED . "§dYou are no longer vanished! §bEveryone can now see you!");
+                        $sender->removeEffect(Effect::NIGHT_VISION);
+                        $sender->getPlayer()->addTitle("§6§lVanish mode", "§c§lis Disabled", 40, 100, 40);
+                        $this->getServer()->broadcastMessage(C::RED . "§a$name §ehas joined the game");
                     }
                 }
             }
